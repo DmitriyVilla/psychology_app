@@ -104,70 +104,64 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
-          if (constraints.maxWidth < 420) {
+
+        // Vertikales Layout  
+         if (constraints.maxWidth < 420) {
+            // Kompakte Ansicht für schmalere Bildschirme
             return Column(
               children: [
                 AppBar(
-                  title: Text((timeOfDay('Benuzer'))),
+                  title: Text('Benutzer'),
                   backgroundColor: colorScheme.primary,
                   leading: const Icon(Icons.menu),
                 ),
-               
-                
-
-                
-              
                 Expanded(child: mainArea),
                 SafeArea(
-                  child: Center(
-                    child: NavigationBarTheme(
-                      data: const NavigationBarThemeData(
-                        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+                  child: NavigationBar(
+                    selectedIndex: selectedIndex,
+                    onDestinationSelected: (int value) {
+                      setState(() {
+                        selectedIndex = value;
+                      });
+                    },
+                    destinations: const [
+                      NavigationDestination(
+                        icon: Icon(Icons.home_outlined),
+                        selectedIcon: Icon(Icons.home),
+                        label: 'Home',
                       ),
-                      child: NavigationBar(
-                          //shadowColor: colorScheme.primaryContainer,,
-                          selectedIndex: selectedIndex,
-                          onDestinationSelected: (int value) {
-                            setState(() {
-                              selectedIndex = value;
-                            });
-                          },
-                        destinations: const [
-                          NavigationDestination(
-                              icon: Icon(Icons.home_outlined),
-                              selectedIcon: Icon(Icons.home),
-                              label: 'Home',
-                            ),
-                            NavigationDestination(
-                              icon: Icon(Icons.search_outlined),
-                              selectedIcon: Icon(Icons.search),
-                              label: 'Search',
-                            ),
-                            NavigationDestination(
-                              icon: Icon(Icons.favorite_border),
-                              selectedIcon: Icon(Icons.favorite),
-                              label: 'Favorites',
-                            ),
-                            NavigationDestination(
-                              icon: Icon(Icons.settings_outlined),
-                              selectedIcon: Icon(Icons.settings),
-                              label: 'Settings',
-                          ),
-                        ],
+                      NavigationDestination(
+                        icon: Icon(Icons.search_outlined),
+                        selectedIcon: Icon(Icons.search),
+                        label: 'Search',
                       ),
-                    )
+                      NavigationDestination(
+                        icon: Icon(Icons.favorite_border),
+                        selectedIcon: Icon(Icons.favorite),
+                        label: 'Favorites',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.settings_outlined),
+                        selectedIcon: Icon(Icons.settings),
+                        label: 'Settings',
+                      ),
+                    ],
                   ),
                 ),
               ],
             );
           } else {
-            // Layout für größere Bildschirme
-
+            // Breite Ansicht für größere Bildschirme
             return Row(
               children: [
                 SafeArea(
                   child: NavigationRail(
-                    extended: constraints.maxWidth >= 600,
+                    selectedIndex: selectedIndex,
+                    onDestinationSelected: (value) {
+                      setState(() {
+                        selectedIndex = value;
+                      });
+                    },
                     destinations: const [
                       NavigationRailDestination(
                         icon: Icon(Icons.home_outlined),
@@ -190,20 +184,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         label: Text('Settings'),
                       ),
                     ],
-
-                    selectedIndex: selectedIndex,
-                    onDestinationSelected: (value) {
-                      setState(() {
-                        selectedIndex = value;
-                      });
-                    },
+                    extended: constraints.maxWidth >= 1000, // Text nur bei größerer Breite anzeigen
                   ),
                 ),
                 Expanded(child: mainArea),
               ],
             );
           }
-        },
+        }
+
+
       ),
     );
   }
