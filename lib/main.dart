@@ -61,19 +61,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius: BorderRadius.circular(25),
                   ),
 
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(25),
 
                   width: 300,
                   height: 300,
                   child: Text(
-                    'Home Page',
+                    'Home Page: This is my Home Page',
                     textAlign: TextAlign.center,
                     
                     style: TextStyle(
                       fontSize: 32,
-                      color: colorScheme.surface
+                      color: colorScheme.surface,
+                      fontFamily: MyTextFont.myTextFont,  
                                             
-                    ),),
+                    ),
+                  ),
 
 
 
@@ -111,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
             return Column(
               children: [
                 AppBar(
-                  title: Text('Benutzer'),
+                  title: const Text('Benutzer'),
                   backgroundColor: colorScheme.primary,
                   leading: const Icon(Icons.menu),
                 ),
@@ -219,6 +221,11 @@ class AppColors {
   static const textSecondaryLight = Color(0xFF888888); // Светло-серый текст для светлой темы
   static const textPrimaryDark = Color(0xFFFFFFFF); // Белый текст для тёмной темы
   static const textSecondaryDark = Color(0xFFB0B0B0); // Светло-серый текст для тёмной темы
+}
+
+
+class MyTextFont {
+  static String myTextFont = 'SF Pro';  
 }
 
 
