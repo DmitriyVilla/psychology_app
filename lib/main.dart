@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:psychology_app/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,33 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = Center(
-          child: Container( 
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple,
-                  borderRadius: BorderRadius.circular(25),
-                  ),
-
-                  padding: const EdgeInsets.all(25),
-
-                  width: 300,
-                  height: 300,
-                  child: Text(
-                    'Home Page: This is my Home Page',
-                    textAlign: TextAlign.center,
-                    
-                    style: TextStyle(
-                      fontSize: 32,
-                      color: colorScheme.surface,
-                      fontFamily: MyTextFont.myTextFont,  
-                                            
-                    ),
-                  ),
-
-
-
-                  ),
-                );
+        page = const HomePage();
         break;
       case 1:
         page = const Center(child: Text('Search Page'));
@@ -98,25 +73,25 @@ class _MyHomePageState extends State<MyHomePage> {
     var mainArea = ColoredBox(
       color: colorScheme.surface,
       child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 300),
         child: page,
       ),
     );
 
     return Scaffold(
+      
       body: LayoutBuilder(
         builder: (context, constraints) {
-
         // Vertikales Layout  
          if (constraints.maxWidth < 420) {
             // Kompakte Ansicht für schmalere Bildschirme
             return Column(
               children: [
-                AppBar(
-                  title: const Text('Benutzer'),
-                  backgroundColor: colorScheme.primary,
-                  leading: const Icon(Icons.menu),
-                ),
+                // AppBar(
+                //   title: const Text('Benutzer'),
+                //   backgroundColor: colorScheme.primary,
+                //   leading: const Icon(Icons.menu),
+                // ),
                 Expanded(child: mainArea),
                 SafeArea(
                   child: NavigationBar(
