@@ -21,39 +21,37 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
 
-    return Scaffold(
+  return Scaffold(
   appBar: AppBar(
     title: const Text('Психологические тесты'),
     centerTitle: true,
   ),
-  body: LayoutBuilder(
-    builder: (context, constraints) {
-      // Anzahl der Spalten basierend auf der Bildschirmbreite anpassen
-      int crossAxisCount = constraints.maxWidth > 600 ? 3 : 2; // 3 Spalten bei größeren Bildschirmen
-      return GridView.builder(
-        padding: const EdgeInsets.all(16.0),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount, // Anzahl der Spalten
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 16.0,
-        ),
-        itemCount: categories.length, // Anzahl der Kategorien
-        itemBuilder: (context, index) {
-          final category = categories[index];
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TestListScreen(category: category),
-                ),
-              );
-            },
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
+  body: Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: Wrap(
+      
+      
+      spacing: 16.0, // Abstand zwischen den Karten horizontal
+      runSpacing: 16.0, // Abstand zwischen den Karten vertikal
+      children: List.generate(categories.length, (index) {
+        final category = categories[index];
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => TestListScreen(category: category),
               ),
-              color: Colors.deepPurple.shade100, // Hintergrundfarbe der Karten
+            );
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            color: Colors.deepPurple.shade100, // Hintergrundfarbe der Karten
+            child: SizedBox(
+              width: 150, // Feste Breite für die Karte
+              height: 150, // Feste Höhe für die Karte
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -71,12 +69,13 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-          );
-        },
-      );
-    },
+          ),
+        );
+      }),
+    ),
   ),
 );
+
 
   }
 }
