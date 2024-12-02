@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:psychology_app/home_page.dart';
+import 'package:psychology_app/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -200,7 +200,7 @@ class AppColors {
 
 
 class MyTextFont {
-  static String myTextFont = 'SF Pro';  
+  static String myTextFont = 'Roboto';  
 }
 
 

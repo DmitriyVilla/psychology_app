@@ -1,0 +1,24 @@
+[
+    {
+      "name": "Тест на стрессоустойчивость",
+      "category": "self_esteem",
+      "questions": [
+        {
+          "question": "Как вы себя чувствуете сегодня?",
+          "answers": [
+            { "text": "Отлично", "score": 5 },
+            { "text": "Неплохо", "score": 3 },
+            { "text": "Плохо", "score": 1 }
+          ]
+        },
+        {
+          "question": "Вы хорошо выспались?",
+          "answers": [
+            { "text": "Да", "score": 5 },
+            { "text": "Нет", "score": 0 }
+          ]
+        }
+      ]
+    }
+  ]
+  
