@@ -200,7 +200,7 @@ class AppColors {
 
 
 class MyTextFont {
-  static String myTextFont = 'Roboto';  
+  static String textFont1 = 'Roboto';  
 }
 
 

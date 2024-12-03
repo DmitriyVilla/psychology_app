@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:psychology_app/modell/models.dart'; // Импортируем модели (Test, Category и т.д.)
+import 'package:psychology_app/pages/test_list_screen.dart';
 import 'package:psychology_app/utils/json_reader.dart'; // Импортируем класс для чтения JSON
 import 'package:psychology_app/utils/category_loader.dart'; // Импортируем класс для чтения JSON
 
@@ -107,44 +108,44 @@ class CategoryCard extends StatelessWidget {
   }
 }
 
-class TestListScreen extends StatelessWidget {
-  final Category category;
-  final List<Test> tests;
+// class TestListScreen extends StatelessWidget {
+//   final Category category;
+//   final List<Test> tests;
 
-  const TestListScreen({super.key, required this.category, required this.tests});
+//   const TestListScreen({super.key, required this.category, required this.tests});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(category.showName),
-      ),
-      body: tests.isEmpty
-          ? const Center(child: Text('Нет доступных тестов для этой категории.'))
-          : ListView.builder(
-              itemCount: tests.length,
-              itemBuilder: (context, index) {
-                final test = tests[index];
-                return Card(
-                  child: ListTile(
-                    title: Text(test.name),
-                    subtitle: Text('Категория: ${test.category}'),
-                    onTap: () {
-                      // Переход к подробностям теста
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TestDetail(test: test),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(category.showName),
+//       ),
+//       body: tests.isEmpty
+//           ? const Center(child: Text('Нет доступных тестов для этой категории.'))
+//           : ListView.builder(
+//               itemCount: tests.length,
+//               itemBuilder: (context, index) {
+//                 final test = tests[index];
+//                 return Card(
+//                   child: ListTile(
+//                     title: Text(test.name),
+//                     subtitle: Text('Категория: ${test.category}'),
+//                     onTap: () {
+//                       // Переход к подробностям теста
+//                       Navigator.push(
+//                         context,
+//                         MaterialPageRoute(
+//                           builder: (context) => TestDetail(test: test),
+//                         ),
+//                       );
+//                     },
+//                   ),
+//                 );
+//               },
+//             ),
+//     );
+//   }
+// }
 
 class TestDetail extends StatelessWidget {
   final Test test;
@@ -179,7 +180,7 @@ class TestDetail extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
                       child: Text('- ${answer.text} (баллы: ${answer.score})'),
                     );
-                  }).toList(),
+                  }),
                 ],
               ),
             ),
