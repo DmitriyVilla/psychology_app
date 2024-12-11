@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:psychology_app/modell/models.dart';
+import '../domain/test.dart';
 
 class JsonReader {
   Future<List<Test>> loadTests(String folderName) async {
@@ -24,7 +24,7 @@ class JsonReader {
 
       return tests;
     } catch (e) {
-      print("Ошибка при загрузке тестов: $e");
+      //print("Ошибка при загрузке тестов: $e");
       return [];
     }
   }

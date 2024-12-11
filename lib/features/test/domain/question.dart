@@ -1,4 +1,5 @@
-import 'package:psychology_app/modell/answer.dart';
+import 'package:psychology_app/features/test/domain/answer.dart';
+
 
 class Question {
   final String text; // Der Text der Frage

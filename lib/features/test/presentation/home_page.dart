@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:psychology_app/modell/models.dart'; // Импортируем модели (Test, Category и т.д.)
-import 'package:psychology_app/pages/test_list_screen.dart';
-import 'package:psychology_app/utils/json_reader.dart'; // Импортируем класс для чтения JSON
-import 'package:psychology_app/utils/category_loader.dart'; // Импортируем класс для чтения JSON
+import 'package:psychology_app/features/test/presentation/test_list_screen.dart';
+import 'package:psychology_app/features/test/data/json_reader.dart'; // Импортируем класс для чтения JSON
+import 'package:psychology_app/features/test/data/category_loader.dart';
+
+import '../domain/all_test_models.dart'; // Импортируем класс для чтения JSON
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   final CategoryLoader _categoryLoader = CategoryLoader();
   final JsonReader _jsonReader = JsonReader();
   List<Category> categories = [];

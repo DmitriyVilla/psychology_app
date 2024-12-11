@@ -1,4 +1,4 @@
-import 'package:psychology_app/modell/question.dart';
+import 'package:psychology_app/features/test/domain/question.dart';
 
 class Test {
 
