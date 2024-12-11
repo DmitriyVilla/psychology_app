@@ -13,6 +13,7 @@ class TestListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(category.showName),
@@ -23,7 +24,7 @@ class TestListScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final test = tests[index];
                 return Card(
-                  color: colorScheme.primary,
+                  color: colorScheme.onPrimary,
                   margin:
                       const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10),
                   elevation: 2.0,

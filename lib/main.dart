@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:psychology_app/features/test/presentation/desktop_layout.dart';
 import 'package:psychology_app/features/test/presentation/home_page.dart';
+import 'package:psychology_app/features/test/presentation/mobile_layout.dart';
 
 
 void main() {
@@ -79,99 +81,34 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
 
-    return Scaffold(
-      
+    return Scaffold(      
       body: LayoutBuilder(
         builder: (context, constraints) {
         // Vertikales Layout  
          if (constraints.maxWidth < 420) {
-            // Kompakte Ansicht für schmalere Bildschirme
-            return Column(
-              children: [
-                // AppBar(
-                //   title: const Text('Benutzer'),
-                //   backgroundColor: colorScheme.primary,
-                //   leading: const Icon(Icons.menu),
-                // ),
-                Expanded(child: mainArea),
-                SafeArea(
-                  child: NavigationBar(
-                    selectedIndex: selectedIndex,
-                    onDestinationSelected: (int value) {
-                      setState(() {
-                        selectedIndex = value;
-                      });
-                    },
-                    destinations: const [
-                      NavigationDestination(
-                        icon: Icon(Icons.home_outlined),
-                        selectedIcon: Icon(Icons.home),
-                        label: 'Home',
-                      ),
-                      NavigationDestination(
-                        icon: Icon(Icons.search_outlined),
-                        selectedIcon: Icon(Icons.search),
-                        label: 'Search',
-                      ),
-                      NavigationDestination(
-                        icon: Icon(Icons.favorite_border),
-                        selectedIcon: Icon(Icons.favorite),
-                        label: 'Favorites',
-                      ),
-                      NavigationDestination(
-                        icon: Icon(Icons.settings_outlined),
-                        selectedIcon: Icon(Icons.settings),
-                        label: 'Settings',
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            return MobileLayout(
+              selectedIndex: selectedIndex,
+              mainArea: mainArea,
+              onDestinationSelected: (value) {
+                setState(() {
+                  selectedIndex = value;
+                });
+              },
             );
           } else {
-            // Breite Ansicht für größere Bildschirme
-            return Row(
-              children: [
-                SafeArea(
-                  child: NavigationRail(
-                    selectedIndex: selectedIndex,
-                    onDestinationSelected: (value) {
-                      setState(() {
-                        selectedIndex = value;
-                      });
-                    },
-                    destinations: const [
-                      NavigationRailDestination(
-                        icon: Icon(Icons.home_outlined),
-                        selectedIcon: Icon(Icons.home),
-                        label: Text('Home'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.search_outlined),
-                        selectedIcon: Icon(Icons.search),
-                        label: Text('Search'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.favorite_border),
-                        selectedIcon: Icon(Icons.favorite),
-                        label: Text('Favorites'),
-                      ),
-                      NavigationRailDestination(
-                        icon: Icon(Icons.settings_outlined),
-                        selectedIcon: Icon(Icons.settings),
-                        label: Text('Settings'),
-                      ),
-                    ],
-                    extended: constraints.maxWidth >= 1000, // Text nur bei größerer Breite anzeigen
-                  ),
-                ),
-                Expanded(child: mainArea),
-              ],
+            return DesktopLayout(
+              selectedIndex: selectedIndex,
+              mainArea: mainArea,
+              onDestinationSelected: (value) {
+                setState(() {
+                  selectedIndex = value;
+                });
+              },
+              extended: constraints.maxWidth >= 1000,
             );
+          
           }
         }
-
-
       ),
     );
   }
@@ -186,10 +123,10 @@ class AppColors {
   static const lightSurface = Color(0xFFFFFFFF); // Белый для карточек и поверхностей
 
   // Dark Theme Colors
-  static const darkPrimary = Color(0xFF4682B4); // Глубокий голубой для акцентов
-  static const darkSecondary = Color(0xFF20B2AA); // Глубокий бирюзовый для второстепенных акцентов
-  static const darkBackground = Color(0xFF121212); // Тёмно-серый фон для ночной темы
-  static const darkSurface = Color(0xFF1E1E1E); // Угольный чёрный для поверхностей
+  static const darkPrimary = Color.fromRGBO(121, 131, 216, 1); // Глубокий голубой для акцентов
+  static const darkSecondary = Color.fromRGBO(127, 178, 240, 1); // Глубокий бирюзовый для второстепенных акцентов
+  static const darkBackground = Color.fromARGB(255, 0, 47, 96); // Тёмно-серый фон для ночной темы
+  static const darkSurface = Color.fromARGB(255, 30, 30, 30); // Угольный чёрный для поверхностей
 
   // Общие цвета для обеих тем
   static const error = Color(0xFFFF6B6B); // Красный для ошибок
