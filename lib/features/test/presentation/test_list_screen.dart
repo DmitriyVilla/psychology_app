@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:psychology_app/features/test/widgets/test_card.dart';
 import '../domain/all_test_models.dart';
-import 'test_detail.dart';
 
 
 class TestListScreen extends StatelessWidget {
@@ -18,40 +18,12 @@ class TestListScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(category.showName),
       ),
-      body: tests.isEmpty ? const Center(child: Text('Нет доступных тестов для этой категории.'))
+      body: tests.isEmpty
+          ? const Center(child: Text('Нет доступных тестов для этой категории.'))
           : ListView.builder(
               itemCount: tests.length,
               itemBuilder: (context, index) {
-                final test = tests[index];
-                return Card(
-                  color: colorScheme.onPrimary,
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10),
-                  elevation: 2.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 16.0),
-                    title: Text(
-                      test.name,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                    // subtitle: Text('Категория: ${test.category}'),
-                    onTap: () {
-                      // Переход к подробностям теста
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TestDetail(test: test),
-                        ),
-                      );
-                    },
-                  ),
-                );
+                return TestCard(test: tests[index]);
               },
             ),
     );

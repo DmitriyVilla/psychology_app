@@ -1,32 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:psychology_app/features/test/widgets/category_card.dart';
-import 'package:psychology_app/features/test/presentation/test_list_screen.dart';
-import 'package:psychology_app/features/test/data/json_reader.dart'; // Импортируем класс для чтения JSON
 import 'package:psychology_app/features/test/data/category_loader.dart';
-
-import '../domain/all_test_models.dart'; // Импортируем класс для чтения JSON
+import '../domain/all_test_models.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
   HomePageState createState() => HomePageState();
-  
 }
 
 class HomePageState extends State<HomePage> {
-  
   final CategoryLoader _categoryLoader = CategoryLoader();
-  final JsonReader _jsonReader = JsonReader();
   List<Category> categories = [];
+  double maxWidth = 0;
 
-  @override  
+  @override
   void initState() {
     super.initState();
     _loadCategories();
   }
 
-  Future<void> _loadCategories  () async {
+  Future<void> _loadCategories() async {
     final loadedCategories = await _categoryLoader.loadCategories();
     setState(() {
       categories = loadedCategories;
@@ -35,7 +30,6 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Психологические тесты'),
@@ -43,39 +37,32 @@ class HomePageState extends State<HomePage> {
       ),
       body: categories.isEmpty
           ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Wrap(
-                    spacing: 16.0, // Расстояние между картами по горизонтали
-                    runSpacing: 16.0, // Расстояние между картами по вертикали
-                    children: categories.map((category) {
-                      return GestureDetector(
-                        onTap: () async {
-                          // Загружаем тесты для категории
-                          final tests = await _jsonReader.loadTests(category.folderName);
-                          // Переходим на экран с тестами
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TestListScreen(
-                                category: category,
-                                tests: tests,
-                              ),
-                            ),
-                          );
-                        },
-                        child: CategoryCard(category: category),
-                      );
-                    }).toList(),
+          : LayoutBuilder(
+              builder: (context, constraints) {
+                // Определяем максимальную ширину карточки
+                final availableWidth = constraints.maxWidth;
+                maxWidth = availableWidth > 400 ? 400 : availableWidth / 2 - 24;
+
+                return SingleChildScrollView(
+                  child: Center(
+                    child: Wrap(
+                      // spacing: 16.0, // Горизонтальное расстояние
+                      // runSpacing: 16.0, // Вертикальное расстояние
+                      children: categories.map((category) {
+                        return CategoryCard(
+                          category: category,
+                          width: maxWidth, // Передаём максимальную ширину
+                        );
+                      }).toList(),
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
     );
   }
 }
+
 
 // class CategoryCard extends StatelessWidget {
 //   final Category category;

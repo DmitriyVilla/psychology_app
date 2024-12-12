@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: LayoutBuilder(
         builder: (context, constraints) {
         // Vertikales Layout  
-         if (constraints.maxWidth < 420) {
+         if (constraints.maxWidth < 450) {
             return MobileLayout(
               selectedIndex: selectedIndex,
               mainArea: mainArea,
@@ -105,8 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
               extended: constraints.maxWidth >= 1000,
-            );
-          
+            );          
           }
         }
       ),
