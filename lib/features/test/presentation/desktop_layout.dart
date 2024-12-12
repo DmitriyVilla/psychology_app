@@ -16,32 +16,33 @@ class DesktopLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var colorScheme = Theme.of(context).colorScheme;
     return Row(
       children: [
         SafeArea(
           child: NavigationRail(
             selectedIndex: selectedIndex,
             onDestinationSelected: onDestinationSelected,
-            destinations: const [
+            destinations: [
               NavigationRailDestination(
-                icon: Icon(Icons.home_outlined),
-                selectedIcon: Icon(Icons.home),
-                label: Text('Home'),
+                icon: const Icon(Icons.home_outlined),
+                selectedIcon: Icon(Icons.home, color: colorScheme.onPrimary),
+                label: const Text('Home'),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.search_outlined),
-                selectedIcon: Icon(Icons.search),
-                label: Text('Search'),
+                icon: const Icon(Icons.search_outlined),
+                selectedIcon: Icon(Icons.search, color: colorScheme.onPrimary),
+                label: const Text('Search'),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.favorite_border),
-                selectedIcon: Icon(Icons.favorite),
-                label: Text('Favorites'),
+                icon: const Icon(Icons.favorite_border),
+                selectedIcon: Icon(Icons.favorite, color: colorScheme.onPrimary),
+                label: const Text('Favorites'),
               ),
               NavigationRailDestination(
-                icon: Icon(Icons.settings_outlined),
-                selectedIcon: Icon(Icons.settings),
-                label: Text('Settings'),
+                icon: const Icon(Icons.settings_outlined),
+                selectedIcon: Icon(Icons.settings, color: colorScheme.onPrimary),
+                label: const Text('Settings'),
               ),
             ],
             extended: extended,

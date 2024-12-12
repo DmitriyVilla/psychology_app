@@ -23,6 +23,7 @@ class _CategoryCardState extends State<CategoryCard> {
 
   @override
   Widget build(BuildContext context) {
+    var colorScheme = Theme.of(context).colorScheme;
     return SizedBox(
       width: widget.width, // Устанавливаем фиксированную ширину карточки
       child: Card(
@@ -59,7 +60,7 @@ class _CategoryCardState extends State<CategoryCard> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          const Color.fromARGB(255, 144, 132, 206).withOpacity(0.6),
+                          colorScheme.primary.withOpacity(0.6), //const Color.fromARGB(255, 144, 132, 206)
                           Colors.transparent,
                         ],
                         begin: Alignment.bottomCenter,
@@ -70,25 +71,25 @@ class _CategoryCardState extends State<CategoryCard> {
                 ),
                 // Текст на карточке
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(25.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
                         widget.category.showName,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: colorScheme.onPrimary,
                         ),
                       ),
                       const SizedBox(height: 4.0),
                       Text(
-                        'description', //category.description,
-                        style: const TextStyle(
+                        'Erlernen Sie effektive Techniken, um Stress zu reduzieren und innere Ruhe zu finden...', //category.description,
+                        style: TextStyle(
                           fontSize: 14.0,
-                          color: Colors.white70,
+                          color: colorScheme.onPrimary,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,

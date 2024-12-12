@@ -23,25 +23,25 @@ class MobileLayout extends StatelessWidget {
           child: NavigationBar(
             selectedIndex: selectedIndex,
             onDestinationSelected: onDestinationSelected,
-            destinations: const [
+            destinations: [
               NavigationDestination(
-                icon: Icon(Icons.home_outlined),
-                selectedIcon: Icon(Icons.home),
+                icon: const Icon(Icons.home_outlined),
+                selectedIcon: Icon(Icons.home, color: colorScheme.onPrimary),
                 label: 'Home',
               ),
               NavigationDestination(
-                icon: Icon(Icons.search_outlined),
-                selectedIcon: Icon(Icons.search),
+                icon: const Icon(Icons.search_outlined),
+                selectedIcon: Icon(Icons.search,color: colorScheme.onPrimary),
                 label: 'Search',
               ),
               NavigationDestination(
-                icon: Icon(Icons.favorite_border),
-                selectedIcon: Icon(Icons.favorite),
+                icon: const Icon(Icons.favorite_border),
+                selectedIcon: Icon(Icons.favorite,color: colorScheme.onPrimary),
                 label: 'Favorites',
               ),
               NavigationDestination(
-                icon: Icon(Icons.settings_outlined),
-                selectedIcon: Icon(Icons.settings),
+                icon: const Icon(Icons.settings_outlined),
+                selectedIcon: Icon(Icons.settings,color: colorScheme.onPrimary),
                 label: 'Settings',
               ),
             ],
