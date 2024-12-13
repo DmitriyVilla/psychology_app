@@ -18,14 +18,28 @@ class TestListScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(category.showName),
       ),
-      body: tests.isEmpty
+      body: Container(
+      // Градиент для фона
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.transparent,
+            colorScheme.secondary, // Начальный цвет (голубой)
+          ],
+          begin: Alignment.topCenter, // Направление градиента
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      
+      child: tests.isEmpty
           ? const Center(child: Text('Нет доступных тестов для этой категории.'))
-          : ListView.builder(
+          : ListView.builder(            
               itemCount: tests.length,
               itemBuilder: (context, index) {
                 return TestCard(test: tests[index]);
               },
             ),
+      )
     );
   }
 }
