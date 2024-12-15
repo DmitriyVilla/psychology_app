@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:psychology_app/core/app_colors.dart';
+import 'package:psychology_app/core/utils/service_locator.dart';
 import 'package:psychology_app/features/test/presentation/desktop_layout.dart';
 import 'package:psychology_app/features/test/presentation/home_page.dart';
 import 'package:psychology_app/features/test/presentation/mobile_layout.dart';
 
 
 void main() {
+  setupLocator(); // Регистрация зависимостей
   runApp(const MyApp());
 }
 

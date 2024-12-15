@@ -74,7 +74,7 @@ class _TestDetailState extends State<TestDetail> {
           children: [
             Text(
               "Вопрос ${_currentQuestionIndex + 1} из ${widget.test.questions.length}",
-              style: TextStyle(fontSize: 18, color: colorScheme.onSecondary.withOpacity(0.5)),
+              style: TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 20),
             Expanded(
@@ -97,7 +97,7 @@ class _TestDetailState extends State<TestDetail> {
                     children: [
                       Text( 
                         currentQuestion.text, 
-                        style: TextStyle(fontSize: 18, color: colorScheme.onSecondary),
+                        style: TextStyle(fontSize: 18),
                       ),
                       const SizedBox(height: 20),
                       ...currentQuestion.answers.map((answer) {
@@ -108,6 +108,7 @@ class _TestDetailState extends State<TestDetail> {
                               _selectedScore = answer.score;
                             });
                           },
+                          // ? Vlt Answer Box trennen?
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 8),
                             padding: const EdgeInsets.all(5),
@@ -136,7 +137,7 @@ class _TestDetailState extends State<TestDetail> {
                                     answer.text,
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: colorScheme.onSecondary// isSelected ? Colors.white : Colors.black,
+                                      //color: colorScheme.onSecondary// isSelected ? Colors.white : Colors.black,
                                     ),
                                   ),
                                 ),
@@ -160,7 +161,7 @@ class _TestDetailState extends State<TestDetail> {
                     child: Text(
                       "Назад",
                       style: TextStyle(
-                        color: colorScheme.onSecondary,
+                        color: colorScheme.secondary,
 
                       )
                     ),
@@ -169,10 +170,13 @@ class _TestDetailState extends State<TestDetail> {
                   onPressed: _selectedScore != null || _currentQuestionIndex == widget.test.questions.length - 1
                       ? _nextQuestion
                       : null,
+                      style: ButtonStyle(
+                        
+                      ),
                   child: Text(
                     _currentQuestionIndex < widget.test.questions.length - 1 ? "Далее" : "Завершить",
                     style: TextStyle(
-                      color: colorScheme.onSecondary,
+                      color: colorScheme.secondary,
 
                     )                    
                   ),
