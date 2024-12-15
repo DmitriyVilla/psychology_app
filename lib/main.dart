@@ -7,7 +7,7 @@ import 'package:psychology_app/features/test/presentation/mobile_layout.dart';
 
 
 void main() {
-  setupLocator(); // Регистрация зависимостей
+  setupLocator(); // Registrierung der Abhängigkeiten
   runApp(const MyApp());
 }
 
@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //String title = timeOfDay('Benutzer');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Psychology App',
@@ -54,27 +53,20 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int selectedIndex = 0;
 
+  // Liste der verfügbaren Seiten
+  final List<Widget> pages = [
+    const HomePage(),
+    const Center(child: Text('Suche')), 
+    const Center(child: Text('Favoriten')),
+    const Center(child: Text('Einstellungen')),
+  ];
+
   @override
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
 
-    Widget page;
-    switch (selectedIndex) {
-      case 0:
-        page = const HomePage();
-        break;
-      case 1:
-        page = const Center(child: Text('Search Page'));
-        break;
-      case 2:
-        page = const Center(child: Text('Favorites Page'));
-        break;
-      case 3:
-        page = const Center(child: Text('Settings Page'));
-        break;
-      default:
-        throw UnimplementedError('No widget for $selectedIndex');
-    }
+    // Vereinfachte Page-Auswahl
+    Widget page = pages[selectedIndex];
 
     var mainArea = ColoredBox(
       color: colorScheme.surface,
@@ -84,11 +76,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
 
-    return Scaffold(      
+    return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
-        // Vertikales Layout  
-         if (constraints.maxWidth < 450) {
+          // Responsives Layout
+          if (constraints.maxWidth < 450) {
             return MobileLayout(
               selectedIndex: selectedIndex,
               mainArea: mainArea,
@@ -108,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
               extended: constraints.maxWidth >= 1000,
-            );          
+            );
           }
         }
       ),
@@ -116,13 +108,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-
-// class MyTextFont {
-//   static String textFont1 = 'Roboto';  
-// }
-
-
-// Динамический текст приветствия
 String timeOfDay(String name) {
   final now = DateTime.now();
   String greeting;

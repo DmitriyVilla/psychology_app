@@ -33,7 +33,7 @@ class _TestDetailState extends State<TestDetail> {
     setState(() {
       if (_currentQuestionIndex > 0) {
         _currentQuestionIndex--;
-        _selectedScore = null; // Reset selected answer for current question
+        _selectedScore = null;
       }
     });
   }
@@ -48,7 +48,7 @@ class _TestDetailState extends State<TestDetail> {
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-              Navigator.pop(context); // Возврат на предыдущий экран
+              Navigator.pop(context);
             },
             child: const Text("Закрыть"),
           ),
@@ -61,6 +61,7 @@ class _TestDetailState extends State<TestDetail> {
   Widget build(BuildContext context) {
     final currentQuestion = widget.test.questions[_currentQuestionIndex];
     var colorScheme = Theme.of(context).colorScheme;
+    var brightness = Theme.of(context).brightness;
 
     return Scaffold(
       appBar: AppBar(
@@ -74,7 +75,7 @@ class _TestDetailState extends State<TestDetail> {
           children: [
             Text(
               "Вопрос ${_currentQuestionIndex + 1} из ${widget.test.questions.length}",
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 20),
             Expanded(
@@ -85,8 +86,12 @@ class _TestDetailState extends State<TestDetail> {
                     borderRadius: BorderRadius.circular(16),
                     gradient: LinearGradient(
                       colors: [
-                        Colors.lightBlueAccent.withOpacity(0.4),
-                        colorScheme.secondary.withOpacity(0.7),
+                        brightness == Brightness.light 
+                            ? Colors.lightBlueAccent.withOpacity(0.4)
+                            : colorScheme.primary.withOpacity(0.2),
+                        brightness == Brightness.light
+                            ? colorScheme.secondary.withOpacity(0.7)
+                            : colorScheme.secondary.withOpacity(0.3),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -97,7 +102,7 @@ class _TestDetailState extends State<TestDetail> {
                     children: [
                       Text( 
                         currentQuestion.text, 
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                       ),
                       const SizedBox(height: 20),
                       ...currentQuestion.answers.map((answer) {
@@ -108,15 +113,16 @@ class _TestDetailState extends State<TestDetail> {
                               _selectedScore = answer.score;
                             });
                           },
-                          // ? Vlt Answer Box trennen?
                           child: Container(
                             margin: const EdgeInsets.symmetric(vertical: 8),
                             padding: const EdgeInsets.all(5),
                             decoration: BoxDecoration(
-                              color: colorScheme.onPrimary, //isSelected ? const Color(0xFF00E0EB).withOpacity(0.2) : Colors.white.withOpacity(0.8),
+                              color: brightness == Brightness.light
+                                  ? colorScheme.surface.withOpacity(0.9)
+                                  : colorScheme.surface.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(12),
                               border: Border.all(
-                                color: isSelected ? Color(0xFF00E0EB) : Colors.transparent,
+                                color: isSelected ? colorScheme.primary : Colors.transparent,
                                 width: 3,
                               ),
                             ),
@@ -137,7 +143,9 @@ class _TestDetailState extends State<TestDetail> {
                                     answer.text,
                                     style: TextStyle(
                                       fontSize: 16,
-                                      //color: colorScheme.onSecondary// isSelected ? Colors.white : Colors.black,
+                                      color: brightness == Brightness.light
+                                          ? colorScheme.onSurface
+                                          : colorScheme.onSurface.withOpacity(0.9),
                                     ),
                                   ),
                                 ),
@@ -158,27 +166,22 @@ class _TestDetailState extends State<TestDetail> {
                 if (_currentQuestionIndex > 0)
                   ElevatedButton(
                     onPressed: _previousQuestion,
-                    child: Text(
-                      "Назад",
-                      style: TextStyle(
-                        color: colorScheme.secondary,
-
-                      )
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: colorScheme.surface,
+                      foregroundColor: colorScheme.primary,
                     ),
+                    child: const Text("Назад"),
                   ),
                 ElevatedButton(
                   onPressed: _selectedScore != null || _currentQuestionIndex == widget.test.questions.length - 1
                       ? _nextQuestion
                       : null,
-                      style: ButtonStyle(
-                        
-                      ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: colorScheme.surface,
+                    foregroundColor: colorScheme.primary,
+                  ),
                   child: Text(
                     _currentQuestionIndex < widget.test.questions.length - 1 ? "Далее" : "Завершить",
-                    style: TextStyle(
-                      color: colorScheme.secondary,
-
-                    )                    
                   ),
                 ),
               ],

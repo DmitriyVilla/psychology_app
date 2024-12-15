@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import 'package:psychology_app/core/utils/service_locator.dart';
 import 'package:psychology_app/features/test/domain/category.dart';
 
 class CategoryLoader {
